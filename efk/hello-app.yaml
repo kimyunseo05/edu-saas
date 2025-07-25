@@ -1,0 +1,12 @@
+# hello-app.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-app
+  labels:
+    app: hello-app
+spec:
+  containers:
+    - name: app
+      image: busybox
+      command: ["sh", "-c", "while true; do echo 'hello world'; sleep 5; done"]

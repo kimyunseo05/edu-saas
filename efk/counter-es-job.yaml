@@ -1,0 +1,21 @@
+# counter-es-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: counter-es
+spec:
+  template:
+    metadata:
+      labels:
+        app: counter-es
+    spec:
+      containers:
+        - name: counter-es
+          image: appropriate/curl
+          command:
+            [
+              "sh",
+              "-c",
+              "i=0; while [ $i -lt 5 ]; do curl -XPOST 'elasticsearch:9200/counter/_doc' -H 'Content-Type: application/json' -d \"{\\\"counter\\\":$i,\\\"date\\\":\\\"$(date)\\\"}\"; i=$((i+1)); sleep 2; done"
+            ]
+      restartPolicy: Never
