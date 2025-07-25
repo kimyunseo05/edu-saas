@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-weather
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-weather
+  template:
+    metadata:
+      labels:
+        app: fastapi-weather
+    spec:
+      containers:
+      - name: fastapi-weather
+        image: drjsjeong/fastapi-weather-app:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: OPENAI_API_KEY
+          value: "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"   # 실제 키로 교체, 시크릿 사용 권장
+        - name: WEATHER_API_KEY
+          value: "6c6516a272db4836a30131652251007"  # 실제 키

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>WebSocket Client</title></head>
+<body>
+  <input id="msg" type="text" placeholder="메시지 입력"/>
+  <button onclick="sendMsg()">Send</button>
+  <pre id="log"></pre>
+  <script>
+    var ws = new WebSocket("ws://localhost:8000/ws");
+    ws.onmessage = function(evt) {
+      document.getElementById('log').textContent += evt.data + "\n";
+    }
+    function sendMsg() {
+      var msg = document.getElementById('msg').value;
+      ws.send(JSON.stringify({message: msg}));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-weather
+spec:
+  type: NodePort    # 또는 LoadBalancer (클라우드 환경일 때)
+  selector:
+    app: fastapi-weather
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30080  # 외부 노출 포트 (선택)

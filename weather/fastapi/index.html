@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Chat (WebSocket)</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <h2>Weather Chatbot</h2>
+    <input type="text" id="msg" placeholder="도시명을 입력하세요...">
+    <button onclick="send()">Send</button>
+    <pre id="log"></pre>
+    <script>
+        var ws = new WebSocket("ws://" + location.host + "/ws");
+        ws.onmessage = function(event) {
+            document.getElementById("log").textContent += event.data + "\n";
+        };
+        function send() {
+            var message = document.getElementById("msg").value;
+            ws.send(JSON.stringify({message: message}));
+        }
+    </script>
+</body>
+</html>
